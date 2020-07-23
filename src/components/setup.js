@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Stats from "stats-js";
+const stats = new Stats();
 
 let width = window.innerWidth;
 let height = window.innerHeight;
@@ -31,10 +33,12 @@ const sceneSetup = () => {
   document.body.appendChild(renderer.domElement);
   window.addEventListener("resize", handleWindowResize);
   // setup stats
+  stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+  document.body.appendChild(stats.dom);
 };
 
 function render() {
   renderer.render(scene, camera);
 }
 
-export { sceneSetup, scene, controls, render, camera };
+export { sceneSetup, scene, controls, render, camera ,stats};
