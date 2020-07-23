@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Stats from "stats-js";
+import {displayCoards} from "./Coards"
 const stats = new Stats();
 
 let width = window.innerWidth;
@@ -15,8 +16,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1, // near plane
   1000 // far plane
 );
-
-camera.position.z = 5;
+camera.position.set(5, 5, 10);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 const handleWindowResize = () => {
@@ -31,7 +31,9 @@ const handleWindowResize = () => {
 const sceneSetup = () => {
   renderer.setSize(width, height);
   document.body.appendChild(renderer.domElement);
+  displayCoards()
   window.addEventListener("resize", handleWindowResize);
+
   // setup stats
   stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
   document.body.appendChild(stats.dom);
