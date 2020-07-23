@@ -1,6 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { scene, render } from "./setup.js";
-import filepath from "../model/scene.gltf"
+import filepath from "../model/canoe.glb"
 console.log(filepath)
 var modelLoader = new GLTFLoader();
 function loadModel() {
