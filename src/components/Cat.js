@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as THREE from "three";
-import tester from "./helper";
 import Stats from "stats-js";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -82,6 +81,12 @@ export default class Cat extends Component {
     window.addEventListener("resize", this.handleWindowResize);
   }
 
+  // clean up 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowResize);
+    window.cancelAnimationFrame(this.requestID);
+    this.controls.dispose();
+}
   render() {
     return <div id="three" ref={(ref) => (this.mount = ref)} />;
   }
