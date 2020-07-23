@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import * as THREE from "three";
+import tester from "./helper"
+import Stats from "stats-js"
+
+const stats = new Stats()
 
 export default class Cat extends Component {
   sceneSetup = () => {
@@ -14,12 +18,15 @@ export default class Cat extends Component {
       1000 // far plane
     );
 
-    // set some distance from a cube that is located at z = 0
     this.camera.position.z = 5;
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(width, height);
     this.mount.appendChild(this.renderer.domElement); // mount using React ref
+
+    // setup stats
+    stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild( stats.dom );
   };
 
   addCustomSceneObjects = () => {
@@ -48,10 +55,11 @@ export default class Cat extends Component {
   };
 
   startAnimationLoop = () => {
+    stats.begin();
     this.cube.rotation.x += 0.01;
     this.cube.rotation.y += 0.01;
-
     this.renderer.render(this.scene, this.camera);
+    stats.end();
     this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
   };
 
