@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import * as THREE from "three";
-import tester from "./helper"
-import Stats from "stats-js"
+import tester from "./helper";
+import Stats from "stats-js";
 
-const stats = new Stats()
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+const stats = new Stats();
 
 export default class Cat extends Component {
   sceneSetup = () => {
@@ -19,14 +21,15 @@ export default class Cat extends Component {
     );
 
     this.camera.position.z = 5;
+    this.controls = new OrbitControls(this.camera, this.mount);
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize(width, height);
     this.mount.appendChild(this.renderer.domElement); // mount using React ref
 
     // setup stats
-    stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild( stats.dom );
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.dom);
   };
 
   addCustomSceneObjects = () => {
@@ -56,17 +59,27 @@ export default class Cat extends Component {
 
   startAnimationLoop = () => {
     stats.begin();
-    this.cube.rotation.x += 0.01;
-    this.cube.rotation.y += 0.01;
+    // this.cube.rotation.x += 0.01;
+    // this.cube.rotation.y += 0.01;
     this.renderer.render(this.scene, this.camera);
     stats.end();
     this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
+  };
+
+  handleWindowResize = () => {
+    const width =  window.innerWidth;
+    const height =  window.innerHeight;
+
+    this.renderer.setSize(width, height);
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
   };
 
   componentDidMount() {
     this.sceneSetup();
     this.addCustomSceneObjects();
     this.startAnimationLoop();
+    window.addEventListener("resize", this.handleWindowResize);
   }
 
   render() {
