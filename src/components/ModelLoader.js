@@ -1,6 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { scene, render } from "./setup.js";
-import filepath from "../model/turtle.glb";
+import filepath from "../model/boy.glb";
 import * as THREE from "three";
 
 console.log(filepath);
@@ -23,35 +23,52 @@ function loadModel() {
 }
 
 function extractBones(gltf) {
-  const root = gltf.scene.children[2];
-  const shell = root.children[0];
-  console.log(gltf.scene.children[2])
+    const root = gltf.scene.children[0];
+    const body = root.children[0];
+    const hips = root.children[2]
+    console.log("hips",hips)
+  const spine = hips.children[0].children[0]
+  const neck = spine.children[0]
+  const head = neck.children[0]
 
-  const armL = shell.children[0];
-  const thighL = shell.children[1];
-  const neck1 = shell.children[2];
-  const neck2 = neck1.children[0];
-  const neck3 = neck2.children[0];
-  const head = neck3.children[0];
-  const armR = shell.children[3];
-  const thighR = shell.children[0];
+  const shoulderL = spine.children[1]
+  const armL = shoulderL.children[0]
+  const sarmL = armL.children[0]
+  const hand = sarmL.children[0]
+  const middleFinger = hand.children[1]
+
+  const shoulderR= spine.children[2]
+
+  const legL = hips.children[1]
+  const shinL = legL.children[0]
+  const feetL = shinL.children[0]
+  const legR = hips.children[2]
+  console.log(feetL,"FFFFFFFFf")
 
 
-  const body = root.children[1];
 
-  scene.add(new THREE.BoxHelper(head, 0x00ffff));
-  scene.add(new THREE.BoxHelper(neck1, 0x00ff00));
-  scene.add(new THREE.BoxHelper(shell, 0x00ffff));
-  scene.add(new THREE.BoxHelper(armR, 0xff00ff));
-  scene.add(new THREE.BoxHelper(shell, 0xaa5ff));
-  scene.add(new THREE.BoxHelper(body, 0xffff00));
+//   const body = root.children[1];
+
+  scene.add(new THREE.BoxHelper(root, 0x00ffff));
+  scene.add(new THREE.BoxHelper(body, 0x00ff00));
+  scene.add(new THREE.BoxHelper(shoulderL, 0x00ffff));
+  scene.add(new THREE.BoxHelper(shoulderR, 0xff00ff));
+//   scene.add(new THREE.BoxHelper(hips, 0xaa5ff));
+//   scene.add(new THREE.BoxHelper(feetL, 0xffff00));
+//   scene.add(new THREE.BoxHelper(spine, 0xffff00));
+//   scene.add(new THREE.BoxHelper(neck, 0xff0000));
+  scene.add(new THREE.BoxHelper(head, 0xffff00));
+  scene.add(new THREE.BoxHelper(middleFinger, 0xffffff));
+  scene.add(new THREE.BoxHelper(hand, 0xffff00));
+  
+
   const box = new THREE.Box3();
-  box.setFromObject(body);
+  box.setFromObject(root);
   console.log("BBOOXX", box);
 
   const headPos = new THREE.Box3();
-  box.setFromObject(head);
-  console.log("BBO", headPos);
+  headPos.setFromObject(head);
+  console.log("head", headPos);
 
 
 
