@@ -1,15 +1,14 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { scene, render } from "./setup.js";
-import filepath from "../model/canoe.glb"
-console.log(filepath)
+import filepath from "../model/dog.glb";
+console.log(filepath);
 var modelLoader = new GLTFLoader();
 function loadModel() {
   return new Promise((resolve, reject) => {
     modelLoader.load(
-        filepath
-      ,
+      filepath,
       function (gltf) {
-          console.log("LOAAADED")
+        console.log("LOAAADED");
         resolve(gltf);
       },
       undefined,
