@@ -1,6 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { scene, render } from "./setup.js";
-import filepath from "../model/dog.glb";
+import filepath from "../model/turtle.glb";
 import * as THREE from "three";
 
 console.log(filepath);
@@ -23,34 +23,43 @@ function loadModel() {
 }
 
 function extractBones(gltf) {
-  const root =
-    gltf.scene.children[0].children[0]
-    const foot1 = root.children[0]
-    const body = root.children[1]
-    const foot2 = root.children[2]
-    const foot3 = root.children[3]
-    const foot4 = root.children[4]
-    console.log(root)
-    console.log(foot1)
-    console.log(foot2)
-    console.log(foot3)
-    console.log(foot4)
-    console.log(body)
+  const root = gltf.scene.children[2];
+  const shell = root.children[0];
+  console.log(gltf.scene.children[2])
 
-    scene.add( new THREE.BoxHelper( foot1, 0x00ffff ) );
-    scene.add( new THREE.BoxHelper( foot2, 0x00ff00 ) );
-    scene.add( new THREE.BoxHelper( foot3, 0x0000ff ) );
-    scene.add( new THREE.BoxHelper( foot4, 0xff00ff ) );
-    scene.add( new THREE.BoxHelper( body, 0xffff00 ) );
-    const box = new THREE.Box3;
-    box.setFromObject(body);
-    console.log("BBOOXX",box)
+  const armL = shell.children[0];
+  const thighL = shell.children[1];
+  const neck1 = shell.children[2];
+  const neck2 = neck1.children[0];
+  const neck3 = neck2.children[0];
+  const head = neck3.children[0];
+  const armR = shell.children[3];
+  const thighR = shell.children[0];
+
+
+  const body = root.children[1];
+
+  scene.add(new THREE.BoxHelper(head, 0x00ffff));
+  scene.add(new THREE.BoxHelper(neck1, 0x00ff00));
+  scene.add(new THREE.BoxHelper(shell, 0x00ffff));
+  scene.add(new THREE.BoxHelper(armR, 0xff00ff));
+  scene.add(new THREE.BoxHelper(shell, 0xaa5ff));
+  scene.add(new THREE.BoxHelper(body, 0xffff00));
+  const box = new THREE.Box3();
+  box.setFromObject(body);
+  console.log("BBOOXX", box);
+
+  const headPos = new THREE.Box3();
+  box.setFromObject(head);
+  console.log("BBO", headPos);
+
+
+
 
   ///////////////////////////////////////////////////////////////// Upper body
 
-
   return {
-    body,
+    
   };
 }
 
