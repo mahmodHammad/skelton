@@ -86,7 +86,7 @@ function putSphere(position) {
 }
 
 function putBox(position) {
-  var geometry = new THREE.BoxBufferGeometry(1.5, 1, 1.1);
+  var geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
   var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   const { x, y, z } = position;
   geometry.translate(x, y, z);
@@ -95,19 +95,23 @@ function putBox(position) {
   scene.add(cube);
 }
 
-function midPoint(min,max){
-  return (max+min)/2
+function midPoint(min, max) {
+  return (max + min) / 2;
 }
 
 function getMidPosition(Position) {
-  const {min,max}=Position
-  const x= midPoint(min.x , max.x) 
-  const y= midPoint(min.y , max.y) 
-  const z= midPoint(min.z , max.z) 
-  let point = new THREE.Vector3(x,y,z)
-  let direction = new THREE.Vector3(1,0,1)
-  let virtual = new THREE.Vector3().addVectors(point,direction)
-  return {point,direction,virtual}
+  const { min, max } = Position;
+  const x = midPoint(min.x, max.x);
+  const y = midPoint(min.y, max.y);
+  const z = midPoint(min.z, max.z);
+  return  new THREE.Vector3(x, y, z);
+}
+
+function getExactPosition(Position, shift) {
+  const point =getMidPosition(Position)
+  let shiftVec = new THREE.Vector3(shift.x, shift.y, shift.z);
+  let exactPosition = new THREE.Vector3().addVectors(point, shiftVec);
+  return exactPosition;
 }
 
 function castShadow(gltf) {
@@ -128,4 +132,5 @@ export {
   putSphere,
   putBox,
   getMidPosition,
+  getExactPosition,
 };
