@@ -85,13 +85,23 @@ function putSphere(position) {
   scene.add(sphere);
 }
 
+function putLine(start, end, color) {
+  const points = [start, end];
+
+  const material = new THREE.LineBasicMaterial({ color });
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const line = new THREE.Line(geometry, material);
+  scene.add(line);
+}
+
 function putBox(position) {
   var geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
   var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   const { x, y, z } = position;
   geometry.translate(x, y, z);
   var cube = new THREE.Mesh(geometry, material);
-
+  cube.addEventListener("click", (e) => console.log("i got clicked", e));
+  console.log(cube);
   scene.add(cube);
 }
 
@@ -104,14 +114,20 @@ function getMidPosition(Position) {
   const x = midPoint(min.x, max.x);
   const y = midPoint(min.y, max.y);
   const z = midPoint(min.z, max.z);
-  return  new THREE.Vector3(x, y, z);
+  return new THREE.Vector3(x, y, z);
 }
 
-function getExactPosition(Position, shift) {
-  const point =getMidPosition(Position)
+function getExactPosition(Position, shift, direction) {
+  const point = getMidPosition(Position);
   let shiftVec = new THREE.Vector3(shift.x, shift.y, shift.z);
+  let directionVec = new THREE.Vector3(direction.x, direction.y, direction.z);
+
   let exactPosition = new THREE.Vector3().addVectors(point, shiftVec);
-  return exactPosition;
+  let helperPosition = new THREE.Vector3().addVectors(
+    exactPosition,
+    directionVec
+  );
+  return { exactPosition, helperPosition, direction };
 }
 
 function castShadow(gltf) {
@@ -131,6 +147,7 @@ export {
   getAbsolutePosition,
   putSphere,
   putBox,
+  putLine,
   getMidPosition,
   getExactPosition,
 };
