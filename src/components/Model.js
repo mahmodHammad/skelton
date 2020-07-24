@@ -17,15 +17,28 @@ function createModel(shift = 0) {
     const { root, head } = extractBones(gltf);
     const rootPosition = getAbsolutePosition(root);
     const headPosition = getAbsolutePosition(head);
-    console.log("headPosition", headPosition);
-    console.log("rootPosition", rootPosition);
-   const rootMidPos = getMidPosition(rootPosition.min, rootPosition.max);
-    // putSphere(rootPosition)
-    const testPos = { x: 1, y: 4, z: 0 };
-    putBox(rootMidPos);
+   const rootMidPos = getMidPosition(rootPosition);
+   const headMidPos = getMidPosition(headPosition);
+console.log(headMidPos,"headMidPos")
+    putBox(rootMidPos.virtual);
     render();
   });
   // castShadow(gltf);
 }
 
 export { createModel };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
