@@ -1,5 +1,5 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { scene, render } from "./setup.js";
+import { scene, render, camera } from "./setup.js";
 import filepath from "../model/boy.glb";
 import * as THREE from "three";
 
@@ -92,6 +92,8 @@ function putLine(start, end, color) {
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
   const line = new THREE.Line(geometry, material);
   scene.add(line);
+  
+  putPlane(end ,camera.position)
 }
 
 function putBox(position) {
@@ -103,6 +105,19 @@ function putBox(position) {
   cube.addEventListener("click", (e) => console.log("i got clicked", e));
   console.log(cube);
   scene.add(cube);
+}
+
+function putPlane(position,direction){
+  // planeGeometry.rotateX(-Math.PI / 2);
+  const planeGeometry = new THREE.PlaneBufferGeometry(1, 0.5);
+  const { x, y, z } = position;
+  planeGeometry.translate(x, y, z);
+  planeGeometry.lookAt(direction)
+
+  const planeMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide});
+  const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  
+  scene.add(plane);
 }
 
 function midPoint(min, max) {
@@ -150,4 +165,5 @@ export {
   putLine,
   getMidPosition,
   getExactPosition,
+  
 };
