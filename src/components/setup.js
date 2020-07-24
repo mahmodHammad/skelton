@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Stats from "stats-js";
-import {displayCoards} from "./Coards"
+import { displayCoards } from "./Coards";
 const stats = new Stats();
 
 let width = window.innerWidth;
@@ -16,8 +16,10 @@ const camera = new THREE.PerspectiveCamera(
   0.1, // near plane
   1000 // far plane
 );
-camera.position.set(5, 5, 10);
+
+camera.position.set(0, 8, 10);
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.maxPolarAngle = 3.13 / 2;
 
 const handleWindowResize = () => {
   width = window.innerWidth;
@@ -31,7 +33,7 @@ const handleWindowResize = () => {
 const sceneSetup = () => {
   renderer.setSize(width, height);
   document.body.appendChild(renderer.domElement);
-  displayCoards()
+  displayCoards();
   window.addEventListener("resize", handleWindowResize);
 
   // setup stats
@@ -43,4 +45,4 @@ function render() {
   renderer.render(scene, camera);
 }
 
-export { sceneSetup, scene, controls, render, camera ,stats};
+export { sceneSetup, scene, controls, render, camera, stats };
