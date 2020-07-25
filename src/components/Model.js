@@ -1,4 +1,5 @@
 import { scene, render,camera,controls } from "./setup.js";
+import {createPoles} from './TextDisplayer'
 import * as THREE from "three";
 
 import {
@@ -16,7 +17,6 @@ function createModel(shift = 0) {
   loadModel().then((gltf) => {
     // gltf.scene.scale.set(0.5,0.5,0.5)
     scene.add(gltf.scene);
-    console.log(gltf);
     const { root, head } = extractBones(gltf);
     const rootRangePosition = getAbsolutePosition(root);
     const headRangePosition = getAbsolutePosition(head);
@@ -45,7 +45,7 @@ function createModel(shift = 0) {
       { x: -1, y: 0.5, z: -0.12 },
       { x: -1, y: 0, z: 0 }
     );
-
+    createPoles()
     console.log(headPos, "headPos");
     putBox(headPos.exactPosition);
     putBox(chestpos.exactPosition);

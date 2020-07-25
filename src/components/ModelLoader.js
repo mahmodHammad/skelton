@@ -3,10 +3,9 @@ import { scene, render, camera, controls } from "./setup.js";
 import filepath from "../model/boy.glb";
 import * as THREE from "three";
 
-let allPlanes=[]
-let globalPlane=tempPlane()
-
-console.log(filepath);
+let allPlanes = [];
+let globalPlane = tempPlane();
+console.log("globalPlane",globalPlane)
 var modelLoader = new GLTFLoader();
 function loadModel() {
   return new Promise((resolve, reject) => {
@@ -89,14 +88,16 @@ function putSphere(position) {
 }
 
 function putLine(start, end, color) {
-  const points = [start, end];
+const globalPlaneCenter = globalPlane.boundingSphere.center;
+
+  const points = [start, globalPlaneCenter];
 
   const material = new THREE.LineBasicMaterial({ color });
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
   const line = new THREE.Line(geometry, material);
   scene.add(line);
-  
-  putPlane(end ,camera.position)
+
+  putPlane(end, camera.position);
 }
 
 function putBox(position) {
@@ -104,34 +105,39 @@ function putBox(position) {
   var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   const { x, y, z } = position;
   geometry.translate(x, y, z);
-  var cube = new THREE.Mesh(geometry, material); 
+  var cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
 }
 
-function tempPlane(){
-  const planeGeometry = new THREE.PlaneBufferGeometry(10, 5);
+function tempPlane() {
+  const planeGeometry = new THREE.PlaneBufferGeometry(5, 2);
   // const { x, y, z } = position;
   // planeGeometry.lookAt(camera.position)
-  planeGeometry.translate(1, 5, 5);
-  const planeMaterial = new THREE.MeshBasicMaterial({color: 0xff0044, side: THREE.DoubleSide});
+  planeGeometry.translate(1, 10, 5);
+  const planeMaterial = new THREE.MeshBasicMaterial({
+    color: 0xffaaaa,
+    side: THREE.DoubleSide,
+  });
   const plane = new THREE.Mesh(planeGeometry, planeMaterial);
   scene.add(plane);
-  return plane
-
+  return planeGeometry;
 }
 
-function putPlane(position,direction){
+function putPlane(position, direction) {
   const planeGeometry = new THREE.PlaneBufferGeometry(1, 0.5);
   const { x, y, z } = position;
 
-  const planeMaterial = new THREE.MeshBasicMaterial({color: 0x77ff00, side: THREE.DoubleSide});
+  const planeMaterial = new THREE.MeshBasicMaterial({
+    color: 0x77ff00,
+    side: THREE.DoubleSide,
+  });
   const plane = new THREE.Mesh(planeGeometry, planeMaterial);
   // planeGeometry.lookAt(direction)
-  plane.oldposition = {x,y,z}
-  allPlanes.push(plane)
-  planeGeometry.lookAt(direction)
+  plane.oldposition = { x, y, z };
+  allPlanes.push(plane);
+  planeGeometry.lookAt(direction);
   planeGeometry.translate(x, y, z);
-  const cent = new THREE.Vector3(4,0,0)
+  // const cent = new THREE.Vector3(4,0,0)
   // planeGeometry.center(cent)
   scene.add(plane);
 }
@@ -142,22 +148,23 @@ function putPlane(position,direction){
 //   var qb = new THREE.Quaternion().setFromEuler(dstrot); // dst quaternion
 //   var qm = new THREE.Quaternion();
 //   camera.quaternion = qm;
-  
+
 //   var o = {t: 0.5};
 //   THREE.Quaternion.slerp(qa, qb, qm, o.t);
 //     camera.quaternion.set(qm.x, qm.y, qm.z, qm.w);
 // }
 
+function updatePlanes(direction) {
+  console.log("allPlanes", allPlanes);
+const globalPlaneCenter = globalPlane.boundingSphere.center;
+console.log("globalPlaneCenter",globalPlaneCenter)
+  globalPlane.lookAt(direction);
+  // allPlanes.forEach((p)=>{
+  //   p.lookAt(direction)
+  //   // p.position(p.oldposition.x, p.oldposition.y, p.oldposition.z);
 
-function updatePlanes(direction){
-console.log("allPlanes",allPlanes)
-globalPlane.lookAt(direction)
-// allPlanes.forEach((p)=>{
-//   p.lookAt(direction)
-//   // p.position(p.oldposition.x, p.oldposition.y, p.oldposition.z);
-
-// })
-  render()
+  // })
+  render();
 }
 
 function midPoint(min, max) {
@@ -171,7 +178,6 @@ function getMidPosition(Position) {
   const z = midPoint(min.z, max.z);
   return new THREE.Vector3(x, y, z);
 }
-
 
 function getExactPosition(Position, shift, direction) {
   const point = getMidPosition(Position);
@@ -205,5 +211,5 @@ export {
   putLine,
   getMidPosition,
   getExactPosition,
-  updatePlanes
+  updatePlanes,
 };
