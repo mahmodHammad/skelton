@@ -81,8 +81,8 @@ function getExactPosition(Position, shift, direction) {
   return { exactPosition, helperPosition, direction };
 }
 
-function updatePlanes(direction) {
-  // text.lookAt(direction);
+function updatePlanes( target , item) {
+  item.lookAt(target);
   // scene.remove(text);
   render();
 }

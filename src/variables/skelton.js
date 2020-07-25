@@ -12,7 +12,7 @@ export default [
     description: "chest is chest chest is chestchest is chestchest is chest",
     active: false,
     shift: { x: 0, y: 1.4, z: 0.4 },
-    direction: { x: 1, y: -0.5, z: 1 },
+    direction: { x: 2, y: -0.5, z: 1.5 },
     label: "Chest",
   },
   {
@@ -20,7 +20,7 @@ export default [
     description: "backbone is BBBBBBBBBBBBBBBBBBBB",
     active: false,
     shift: { x: 0, y: 1.5, z: -0.5 },
-    direction: { x: 2, y: 1, z: -1.4 },
+    direction: { x: 2, y: 1.5, z: -1 },
     label: "Backbone",
   },
   {
@@ -28,7 +28,7 @@ export default [
     description: "righ arm is useful",
     active: false,
     shift: { x: -1, y: 0.5, z: -0.12 },
-    direction: { x: -2, y:-0.5, z: 1.5 },
+    direction: { x: -1, y:3, z: 1.5 },
     label: "Right Arm",
   },
   {
@@ -36,7 +36,7 @@ export default [
     description: "left arm is useful XD",
     active: false,
     shift: { x: 1, y: 0.5, z: -0.12 },
-    direction: { x: 1, y: -1, z: 1.5 },
+    direction: { x: 2, y: -1, z: 1.5 },
     label: "Left Arm",
   },
 ];

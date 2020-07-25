@@ -50,6 +50,7 @@ function renderItem(item) {
       helperPosition.y,
       helperPosition.z
     );
+    renderedItems.text.lookAt(camera.position)
   } else {
     console.log("ERRRRRRRROR, MODEL NOT LOADED YET");
   }
@@ -61,8 +62,10 @@ function createModel() {
     loadedModel = gltf;
 
     controls.addEventListener("change", (e) => {
-      const cameraPosition = e.target.object.position;
-      updatePlanes(cameraPosition);
+      if (renderedItems.text !== undefined) {
+        const cameraPosition = e.target.object.position;
+        updatePlanes(cameraPosition, renderedItems.text);
+      }
     });
     render();
   });

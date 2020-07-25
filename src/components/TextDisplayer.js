@@ -26,9 +26,9 @@ function createPoles(name, x, y, z) {
 
   const geometry = new THREE.TextGeometry(name, fontAttributes);
   const pole = new THREE.Mesh(geometry, textMaterial);
-  pole.translateX(x );
+  pole.translateX(x);
   pole.translateY(y);
-  pole.translateZ( z );
+  pole.translateZ(z);
   scene.add(pole);
   render();
   return pole;
