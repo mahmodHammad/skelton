@@ -4,31 +4,46 @@ import skelton from "../variables/skelton.js";
 import { createPoles } from "./TextDisplayer";
 
 import {
-  extractBones,
   loadModel,
   getAbsolutePosition,
   getExactPosition,
   updatePlanes,
 } from "./ModelLoader";
 
+let loadedModel = undefined;
+
+function getItemPosition(item) {
+  const rootRangePosition = getAbsolutePosition(loadedModel);
+
+  const itemPosition = getExactPosition(
+    rootRangePosition,
+    item.shift,
+    item.direction
+  );
+  return itemPosition;
+}
+
+function renderItem(item) {
+  if (loadedModel !== undefined) {
+    const itemPosition = getItemPosition(item);
+    const helperPosition = itemPosition.helperPosition;
+    putBox(itemPosition.exactPosition);
+    putLine(itemPosition.exactPosition, helperPosition);
+    createPoles(
+      item.label,
+      helperPosition.x,
+      helperPosition.y,
+      helperPosition.z
+    );
+  } else {
+    console.log("ERRRRRRRROR, MODEL NOT LOADED YET");
+  }
+}
+
 function createModel() {
   loadModel().then((gltf) => {
     scene.add(gltf.scene);
-
-    const rootRangePosition = getAbsolutePosition(gltf);
-
-    skelton.map(item=>{
-      const headPos = getExactPosition(
-        rootRangePosition,
-        item.shift,
-        item.direction
-      );
-      const helperPosition =headPos.helperPosition
-      
-      putBox(headPos.exactPosition);
-      putLine(headPos.exactPosition,helperPosition);
-      createPoles(item.label,helperPosition.x,helperPosition.y,helperPosition.z)
-    })
+    loadedModel = gltf;
 
     controls.addEventListener("change", (e) => {
       const cameraPosition = e.target.object.position;
@@ -37,8 +52,11 @@ function createModel() {
     render();
   });
 }
-function handleItemClick(item){
-  console.log("item", item.target.id)
+function handleItemClick(item) {
+  const targetID = item.target.id;
+  const target = skelton.filter((s) => s.id === targetID)[0]
+  renderItem(target);
+  console.log("item", item.target.id);
 }
 
-export { createModel ,handleItemClick};
+export { createModel, handleItemClick };
