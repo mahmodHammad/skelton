@@ -2,10 +2,14 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { scene, render, camera, controls } from "./setup.js";
 import filepath from "../model/boy.glb";
 import * as THREE from "three";
+import { createPoles } from "./TextDisplayer";
 
 let allPlanes = [];
-let globalPlane = tempPlane();
-console.log("globalPlane",globalPlane)
+let text = createPoles("chest");
+text.translateX(2);
+text.translateY(7);
+text.translateZ(4);
+
 var modelLoader = new GLTFLoader();
 function loadModel() {
   return new Promise((resolve, reject) => {
@@ -49,7 +53,7 @@ function extractBones(gltf) {
 
   //   const body = root.children[1];
 
-  scene.add(new THREE.BoxHelper(root, 0xffffff));
+  // scene.add(new THREE.BoxHelper(root, 0xffffff));
   // scene.add(new THREE.BoxHelper(body, 0x00ff00));
   // scene.add(new THREE.BoxHelper(shoulderL, 0x00ffff));
   // scene.add(new THREE.BoxHelper(shoulderR, 0xff00ff));
@@ -57,7 +61,7 @@ function extractBones(gltf) {
   //   scene.add(new THREE.BoxHelper(feetL, 0xffff00));
   //   scene.add(new THREE.BoxHelper(spine, 0xffff00));
   //   scene.add(new THREE.BoxHelper(neck, 0xff0000));
-  scene.add(new THREE.BoxHelper(head, 0xff0000));
+  // scene.add(new THREE.BoxHelper(head, 0xff0000));
   // scene.add(new THREE.BoxHelper(middleFinger, 0xffffff));
   // scene.add(new THREE.BoxHelper(hand, 0xffff00));
   ///////////////////////////////////////////////////////////////// Upper body
@@ -88,16 +92,14 @@ function putSphere(position) {
 }
 
 function putLine(start, end, color) {
-const globalPlaneCenter = globalPlane.boundingSphere.center;
 
-  const points = [start, globalPlaneCenter];
+  const points = [start, text.position];
 
   const material = new THREE.LineBasicMaterial({ color });
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
   const line = new THREE.Line(geometry, material);
   scene.add(line);
 
-  putPlane(end, camera.position);
 }
 
 function putBox(position) {
@@ -107,39 +109,6 @@ function putBox(position) {
   geometry.translate(x, y, z);
   var cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
-}
-
-function tempPlane() {
-  const planeGeometry = new THREE.PlaneBufferGeometry(5, 2);
-  // const { x, y, z } = position;
-  // planeGeometry.lookAt(camera.position)
-  planeGeometry.translate(1, 10, 5);
-  const planeMaterial = new THREE.MeshBasicMaterial({
-    color: 0xffaaaa,
-    side: THREE.DoubleSide,
-  });
-  const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  scene.add(plane);
-  return planeGeometry;
-}
-
-function putPlane(position, direction) {
-  const planeGeometry = new THREE.PlaneBufferGeometry(1, 0.5);
-  const { x, y, z } = position;
-
-  const planeMaterial = new THREE.MeshBasicMaterial({
-    color: 0x77ff00,
-    side: THREE.DoubleSide,
-  });
-  const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  // planeGeometry.lookAt(direction)
-  plane.oldposition = { x, y, z };
-  allPlanes.push(plane);
-  planeGeometry.lookAt(direction);
-  planeGeometry.translate(x, y, z);
-  // const cent = new THREE.Vector3(4,0,0)
-  // planeGeometry.center(cent)
-  scene.add(plane);
 }
 
 // function smoothControl (){
@@ -155,10 +124,7 @@ function putPlane(position, direction) {
 // }
 
 function updatePlanes(direction) {
-  console.log("allPlanes", allPlanes);
-const globalPlaneCenter = globalPlane.boundingSphere.center;
-console.log("globalPlaneCenter",globalPlaneCenter)
-  globalPlane.lookAt(direction);
+  text.lookAt(direction);
   // allPlanes.forEach((p)=>{
   //   p.lookAt(direction)
   //   // p.position(p.oldposition.x, p.oldposition.y, p.oldposition.z);

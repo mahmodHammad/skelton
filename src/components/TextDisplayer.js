@@ -14,7 +14,7 @@ const loadedfont = fontLoader.parse(fonter);
 function createPoles(name, x, y, z) {
   const fontAttributes = {
     font: loadedfont,
-    size: 1,
+    size: 0.7,
     height: 0,
     curveSegments: 12,
     bevelEnabled: true,
