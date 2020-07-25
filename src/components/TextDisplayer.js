@@ -24,7 +24,7 @@ function createPoles(name, x, y, z) {
     bevelSegments: 1,
   };
 
-  const geometry = new THREE.TextGeometry("Chest", fontAttributes);
+  const geometry = new THREE.TextGeometry(name, fontAttributes);
   const pole = new THREE.Mesh(geometry, textMaterial);
   pole.translateX(0 );
   pole.translateY( 0);
