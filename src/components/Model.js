@@ -70,9 +70,7 @@ function createModel() {
     render();
   });
 }
-function handleItemClick(item) {
-  const targetID = item.target.id;
-  const target = skelton.find((s) => s.id === targetID);
+function handleItemClick(target) {
   if (!target.active) {
     renderItem(target);
     target.active = true;

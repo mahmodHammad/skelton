@@ -6,47 +6,45 @@ body {
 canvas {
   display: block;
 }
-#three {
-}
+/* #three {
+} */
 
 .sidebar {
   z-index: 100;
   color: #fff;
   position: absolute;
-  background-color: #fff8;
+  background-color: #fff5;
   top: calc(50% - 120px);
-  /* height: 400px; */
   width: 200px;
-  border: 1px solid #555;
-  border-radius: 5px;
-  /* padding: 20px; */
-  /* padding: 10px; */
-  transition: ease 0.3s all;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  transition: ease 0.5s all;
 }
 
 #sideToggle {
   position: absolute;
-  top: calc(50% - 12px);
-  right: -13px;
+  top: calc(50% - 18px);
+  right: -18px;
 }
 
 #bottomToggle {
   position: absolute;
-  top: -10px;
+  top: -18px;
   transform: rotate(90deg);
   right: calc(50% - 12px);
 }
+
 .Toggle {
   color: #eee;
   border-radius: 50%;
   transition: ease 0.6s all;
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   text-align: center;
   font-weight: bold;
-  font-size: 22;
+  font-size: 20px;
   border: none;
-  background-color: #888;
+  background-color: #555;
   /* border: solid 1px #777; */
   padding-right: 7px;
   padding-top: 3px;
@@ -71,6 +69,9 @@ canvas {
 
 .sidebar-list li {
   border: 1px solid #777;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+
   border-right: none;
   /* background-color: #fff0; */
   padding: 15px 20px;
@@ -85,21 +86,25 @@ canvas {
 }
 
 .openSB {
-  transform: translateX(-195px);
+  transform: translateX(-188px);
 }
 .openBB {
-  transform: translateY(90px);
+  transform: translateY(90%);
 }
 
 .bottombar {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   position: absolute;
-  height: 60px;
-  width: 100%;
-  background-color: #fff8;
+  /* height: 60px; */
+  font-size: 20px;
+  width: 50%;
+  left: 20%;
+  background-color: #fff5;
   bottom: 0;
   color: #fff;
   padding: 20px 40px;
-  transition: ease 0.3s all;
+  transition: ease 0.5s all;
 }
 
 .rotateSideToggle {
