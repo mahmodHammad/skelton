@@ -1,9 +1,65 @@
 body {
   margin: 0;
+
   overflow: hidden;
 }
 canvas {
   display: block;
 }
 #three {
+}
+
+.sidebar {
+  z-index: 100;
+  color: #fff;
+  position: absolute;
+  background-color: #fff9;
+  top: calc(50% - 120px);
+  /* height: 400px; */
+  width: 200px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  /* padding: 20px; */
+  /* padding: 10px; */
+}
+
+#toggle {
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  border-radius: 50%;
+  background-color: #fffa;
+  transition: ease 0.3s all;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18;
+  border: solid 1px #777;
+  padding-left: 7px;
+}
+
+#toggle:hover {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.sidebar-list {
+  list-style: none;
+  /* border: 1px solid#7772; */
+  text-align: left;
+  padding: 0;
+}
+
+.sidebar-list li {
+  border: 1px solid #777;
+  background-color: #999;
+  padding: 15px 20px;
+  font-size: 19px;
+  font-family: sans-serif;
+}
+
+.sidebar-list li:hover {
+  background-color: #aaa;
+  cursor: pointer;
 }
