@@ -31,18 +31,16 @@ const addCustomSceneObjects = () => {
 
 function putSphere(position) {
   const geometry = new THREE.SphereGeometry(
-    3.3,
-    32,
-    1,
-    undefined,
-    undefined,
-    undefined,
-    Math.PI / 2
+    0.07,
+    16,
+    16
   );
-  const material = new THREE.MeshBasicMaterial({ color: 0x551111 });
-  const sphere = new THREE.Mesh(geometry, material);
-  scene.add(sphere);
-  return sphere;
+  const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const { x, y, z } = position;
+  geometry.translate(x, y, z);
+  const shpere = new THREE.Mesh(geometry, material);
+  scene.add(shpere);
+  return shpere;
 }
 
 function putLine(start, end, color) {
@@ -56,8 +54,8 @@ function putLine(start, end, color) {
 }
 
 function putBox(position) {
-  const geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const geometry = new THREE.BoxBufferGeometry(1.5, 1.5, 1);
+  const material = new THREE.MeshBasicMaterial({ color: 0xaa3333});
   const { x, y, z } = position;
   geometry.translate(x, y, z);
   const cube = new THREE.Mesh(geometry, material);

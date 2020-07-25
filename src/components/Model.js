@@ -1,5 +1,5 @@
 import { scene, render, camera, controls } from "./setup.js";
-import { putBox, putLine } from "./SceneObjects";
+import { putBox, putLine, putSphere } from "./SceneObjects";
 import skelton from "../variables/skelton.js";
 import { createPoles } from "./TextDisplayer";
 
@@ -12,6 +12,21 @@ import {
 
 let loadedModel = undefined;
 let renderedItems = {};
+
+function createModel() {
+  loadModel().then((gltf) => {
+    scene.add(gltf.scene);
+    loadedModel = gltf;
+    putBox({x:0,y:3,z:0.2})
+    controls.addEventListener("change", (e) => {
+      if (renderedItems.text !== undefined) {
+        const cameraPosition = e.target.object.position;
+        updatePlanes(cameraPosition, renderedItems.text);
+      }
+    });
+    render();
+  });
+}
 
 function getItemPosition(item) {
   const rootRangePosition = getAbsolutePosition(loadedModel);
@@ -42,7 +57,7 @@ function renderItem(item) {
 
     clearItems();
     renderedItems.item = item;
-    renderedItems.box = putBox(itemPosition.exactPosition);
+    renderedItems.box = putSphere(itemPosition.exactPosition);
     renderedItems.line = putLine(itemPosition.exactPosition, helperPosition);
     renderedItems.text = createPoles(
       item.label,
@@ -50,31 +65,16 @@ function renderItem(item) {
       helperPosition.y,
       helperPosition.z
     );
-    renderedItems.text.lookAt(camera.position)
+    renderedItems.text.lookAt(camera.position);
   } else {
     console.log("ERRRRRRRROR, MODEL NOT LOADED YET");
   }
 }
 
-function createModel() {
-  loadModel().then((gltf) => {
-    scene.add(gltf.scene);
-    loadedModel = gltf;
-
-    controls.addEventListener("change", (e) => {
-      if (renderedItems.text !== undefined) {
-        const cameraPosition = e.target.object.position;
-        updatePlanes(cameraPosition, renderedItems.text);
-      }
-    });
-    render();
-  });
-}
 function handleItemClick(target) {
   if (!target.active) {
     renderItem(target);
     target.active = true;
-    // console.log(target);
   }
 }
 

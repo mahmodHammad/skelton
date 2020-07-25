@@ -4,7 +4,7 @@ import fonter from "three/examples/fonts/gentilis_regular.typeface.json";
 
 const fontLoader = new THREE.FontLoader();
 
-var textMaterial = new THREE.MeshPhongMaterial({
+var textMaterial = new THREE.MeshBasicMaterial({
   color: 0xffffff,
   specular: 0xd4af37,
 });
@@ -15,7 +15,7 @@ function createPoles(name, x, y, z) {
   const fontAttributes = {
     font: loadedfont,
     size: 0.7,
-    height: 0.1,
+    height: 0.2,
     curveSegments: 12,
     bevelEnabled: true,
     bevelThickness: 0,

@@ -22,8 +22,8 @@ export default [
     description:
       "The human back, is the large posterior area of the human body, rising from the top of the buttocks to the back of the neck.",
     active: false,
-    shift: { x: 0, y: 1.5, z: -0.5 },
-    direction: { x: 2, y: 1.5, z: -1 },
+    shift: { x: 0, y: 1.5, z: -0.45 },
+    direction: { x: 1, y: 1.5, z: -1 },
     label: "Backbone",
   },
   {
