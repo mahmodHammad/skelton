@@ -11,6 +11,7 @@ import {
 } from "./ModelLoader";
 
 let loadedModel = undefined;
+let renderedItems = {};
 
 function getItemPosition(item) {
   const rootRangePosition = getAbsolutePosition(loadedModel);
@@ -23,13 +24,27 @@ function getItemPosition(item) {
   return itemPosition;
 }
 
+function clearItems() {
+  if (renderedItems.box !== undefined) {
+    const { box, line, text, item } = renderedItems;
+    scene.remove(box);
+    scene.remove(text);
+    scene.remove(line);
+    const index = skelton.findIndex((s) => s.id === item.id);
+    skelton[index].active = false;
+  }
+}
+
 function renderItem(item) {
   if (loadedModel !== undefined) {
     const itemPosition = getItemPosition(item);
     const helperPosition = itemPosition.helperPosition;
-    putBox(itemPosition.exactPosition);
-    putLine(itemPosition.exactPosition, helperPosition);
-    createPoles(
+
+    clearItems();
+    renderedItems.item = item;
+    renderedItems.box = putBox(itemPosition.exactPosition);
+    renderedItems.line = putLine(itemPosition.exactPosition, helperPosition);
+    renderedItems.text = createPoles(
       item.label,
       helperPosition.x,
       helperPosition.y,
@@ -54,9 +69,12 @@ function createModel() {
 }
 function handleItemClick(item) {
   const targetID = item.target.id;
-  const target = skelton.filter((s) => s.id === targetID)[0]
-  renderItem(target);
-  console.log("item", item.target.id);
+  const target = skelton.find((s) => s.id === targetID);
+  if (!target.active) {
+    renderItem(target);
+    target.active = true;
+    // console.log(target);
+  }
 }
 
 export { createModel, handleItemClick };

@@ -3,7 +3,7 @@ import { scene } from "./setup";
 import { createModel } from "./Model";
 
 let cube;
-function addLights(){
+function addLights() {
   const lights = [];
   lights[0] = new THREE.PointLight(0x88ffff, 1, 0);
   lights[1] = new THREE.PointLight(0x88ffff, 2, 0);
@@ -25,7 +25,7 @@ function addLights(){
 }
 
 const addCustomSceneObjects = () => {
-  addLights()
+  addLights();
   createModel();
 };
 
@@ -42,6 +42,7 @@ function putSphere(position) {
   const material = new THREE.MeshBasicMaterial({ color: 0x551111 });
   const sphere = new THREE.Mesh(geometry, material);
   scene.add(sphere);
+  return sphere;
 }
 
 function putLine(start, end, color) {
@@ -51,15 +52,17 @@ function putLine(start, end, color) {
   const geometry = new THREE.BufferGeometry().setFromPoints(points);
   const line = new THREE.Line(geometry, material);
   scene.add(line);
+  return line;
 }
 
 function putBox(position) {
-  var geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
-  var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  const geometry = new THREE.BoxBufferGeometry(0.1, 0.1, 0.1);
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   const { x, y, z } = position;
   geometry.translate(x, y, z);
-  var cube = new THREE.Mesh(geometry, material);
+  const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
+  return cube;
 }
 
 export { addCustomSceneObjects, cube, putLine, putBox, putSphere };
