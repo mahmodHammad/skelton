@@ -21,22 +21,30 @@ canvas {
   border-radius: 4px;
   /* padding: 20px; */
   /* padding: 10px; */
+  transition: ease 0.3s all;
 }
 
 #toggle {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 12px) ;
   right: -10px;
   border-radius: 50%;
-  background-color: #fffa;
+  background-color: #999;
   transition: ease 0.3s all;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
+  /* padding-left: 1px; */
   text-align: center;
   font-weight: bold;
-  font-size: 18;
-  border: solid 1px #777;
-  padding-left: 7px;
+  font-size: 22;
+  border: none;
+  border-right: 1px solid #777;
+  /* border: solid 1px #777; */
+  padding-right: 6px;
+}
+
+#toggle:focus {
+  outline: none;
 }
 
 #toggle:hover {
@@ -62,4 +70,8 @@ canvas {
 .sidebar-list li:hover {
   background-color: #aaa;
   cursor: pointer;
+}
+
+.openSB {
+  transform: translateX(-195px);
 }
