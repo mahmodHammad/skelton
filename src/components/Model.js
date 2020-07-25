@@ -1,5 +1,4 @@
 import { scene, render,camera,controls } from "./setup.js";
-import {createPoles} from './TextDisplayer'
 import * as THREE from "three";
 
 import {
@@ -45,7 +44,6 @@ function createModel(shift = 0) {
       { x: -1, y: 0.5, z: -0.12 },
       { x: -1, y: 0, z: 0 }
     );
-    createPoles()
     console.log(headPos, "headPos");
     putBox(headPos.exactPosition);
     putBox(chestpos.exactPosition);
@@ -53,11 +51,11 @@ function createModel(shift = 0) {
     putBox(leftArm.exactPosition);
     putBox(rightArm.exactPosition);
 
-    putBox(headPos.helperPosition);
-    putBox(chestpos.helperPosition);
-    putBox(BackPos.helperPosition);
-    putBox(leftArm.helperPosition);
-    putBox(rightArm.helperPosition);
+    // putBox(headPos.helperPosition);
+    // putBox(chestpos.helperPosition);
+    // putBox(BackPos.helperPosition);
+    // putBox(leftArm.helperPosition);
+    // putBox(rightArm.helperPosition);
 
     putLine(headPos.exactPosition , headPos.helperPosition)
     putLine(chestpos.exactPosition , chestpos.helperPosition)

@@ -34,9 +34,9 @@ const handleWindowResize = () => {
 const sceneSetup = () => {
   renderer.setSize(width, height);
   document.body.appendChild(renderer.domElement);
-  displayCoards();
   window.addEventListener("resize", handleWindowResize);
-
+  
+  // displayCoards();
   // setup stats
   stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
   document.body.appendChild(stats.dom);
