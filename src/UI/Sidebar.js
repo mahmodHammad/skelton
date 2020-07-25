@@ -10,7 +10,7 @@ export default function Sidebar() {
         ))}
       </ul>
 
-      <button id="toggle" onClick={()=>settoggle(!toggle)}> {toggle? ">" : "<"} </button>
+      <button  className="toggle" id="toggle" onClick={()=>settoggle(!toggle)}> {toggle? ">" : "<"} </button>
     </div>
   );
 }
