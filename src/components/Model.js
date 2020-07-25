@@ -9,6 +9,7 @@ import {
   putBox,
   putLine,
   getExactPosition,
+  updatePlanes
 } from "./ModelLoader";
 
 function createModel(shift = 0) {
@@ -63,6 +64,13 @@ function createModel(shift = 0) {
     putLine(leftArm.exactPosition , leftArm.helperPosition)
     putLine(rightArm.exactPosition , rightArm.helperPosition)
     putLine(BackPos.exactPosition , BackPos.helperPosition)
+
+    
+controls.addEventListener("change", (e) => {
+  const pos = e.target.object.position
+  updatePlanes(pos)
+  // console.log("rotate");
+});
     // camera.lookAt(rightArm.helperPosition)
     
     // camera.rotateOnAxis(new THREE.Vector3(0,1,0),Math.PI)

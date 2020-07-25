@@ -1,7 +1,10 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { scene, render, camera } from "./setup.js";
+import { scene, render, camera, controls } from "./setup.js";
 import filepath from "../model/boy.glb";
 import * as THREE from "three";
+
+let allPlanes=[]
+let globalPlane=tempPlane()
 
 console.log(filepath);
 var modelLoader = new GLTFLoader();
@@ -101,23 +104,60 @@ function putBox(position) {
   var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   const { x, y, z } = position;
   geometry.translate(x, y, z);
-  var cube = new THREE.Mesh(geometry, material);
-  cube.addEventListener("click", (e) => console.log("i got clicked", e));
-  console.log(cube);
+  var cube = new THREE.Mesh(geometry, material); 
   scene.add(cube);
 }
 
+function tempPlane(){
+  const planeGeometry = new THREE.PlaneBufferGeometry(10, 5);
+  // const { x, y, z } = position;
+  // planeGeometry.lookAt(camera.position)
+  planeGeometry.translate(1, 5, 5);
+  const planeMaterial = new THREE.MeshBasicMaterial({color: 0xff0044, side: THREE.DoubleSide});
+  const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  scene.add(plane);
+  return plane
+
+}
+
 function putPlane(position,direction){
-  // planeGeometry.rotateX(-Math.PI / 2);
   const planeGeometry = new THREE.PlaneBufferGeometry(1, 0.5);
   const { x, y, z } = position;
-  planeGeometry.translate(x, y, z);
-  planeGeometry.lookAt(direction)
 
-  const planeMaterial = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide});
+  const planeMaterial = new THREE.MeshBasicMaterial({color: 0x77ff00, side: THREE.DoubleSide});
   const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  
+  // planeGeometry.lookAt(direction)
+  plane.oldposition = {x,y,z}
+  allPlanes.push(plane)
+  planeGeometry.lookAt(direction)
+  planeGeometry.translate(x, y, z);
+  const cent = new THREE.Vector3(4,0,0)
+  // planeGeometry.center(cent)
   scene.add(plane);
+}
+
+// function smoothControl (){
+
+//   var qa = camera.quaternion; // src quaternion
+//   var qb = new THREE.Quaternion().setFromEuler(dstrot); // dst quaternion
+//   var qm = new THREE.Quaternion();
+//   camera.quaternion = qm;
+  
+//   var o = {t: 0.5};
+//   THREE.Quaternion.slerp(qa, qb, qm, o.t);
+//     camera.quaternion.set(qm.x, qm.y, qm.z, qm.w);
+// }
+
+
+function updatePlanes(direction){
+console.log("allPlanes",allPlanes)
+globalPlane.lookAt(direction)
+// allPlanes.forEach((p)=>{
+//   p.lookAt(direction)
+//   // p.position(p.oldposition.x, p.oldposition.y, p.oldposition.z);
+
+// })
+  render()
 }
 
 function midPoint(min, max) {
@@ -132,6 +172,7 @@ function getMidPosition(Position) {
   return new THREE.Vector3(x, y, z);
 }
 
+
 function getExactPosition(Position, shift, direction) {
   const point = getMidPosition(Position);
   let shiftVec = new THREE.Vector3(shift.x, shift.y, shift.z);
@@ -145,25 +186,24 @@ function getExactPosition(Position, shift, direction) {
   return { exactPosition, helperPosition, direction };
 }
 
-function castShadow(gltf) {
-  gltf.scene.traverse(function (node) {
-    if (node.isMesh) {
-      node.castShadow = true;
-    }
-    scene.add(gltf.scene);
-    render();
-  });
-}
+// function castShadow(gltf) {
+//   gltf.scene.traverse(function (node) {
+//     if (node.isMesh) {
+//       node.castShadow = true;
+//     }
+//     scene.add(gltf.scene);
+//     render();
+//   });
+// }
 
 export {
   extractBones,
   loadModel,
-  castShadow,
   getAbsolutePosition,
   putSphere,
   putBox,
   putLine,
   getMidPosition,
   getExactPosition,
-  
+  updatePlanes
 };
