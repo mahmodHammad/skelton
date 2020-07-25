@@ -3,11 +3,7 @@ import { scene, render, camera, controls } from "./setup.js";
 import filepath from "../model/boy.glb";
 import * as THREE from "three";
 import { createPoles } from "./TextDisplayer";
-
-let text = createPoles("head");
-text.translateX(2);
-text.translateY(7);
-text.translateZ(4);
+// let text = createPoles("Hello World",1,7,1);
 
 var modelLoader = new GLTFLoader();
 function loadModel() {
@@ -53,9 +49,11 @@ function extractBones(gltf) {
   };
 }
 
-function getAbsolutePosition(obj) {
+function getAbsolutePosition(gltf) {
+  const { root } = extractBones(gltf);
+
   const box = new THREE.Box3();
-  return box.setFromObject(obj);
+  return box.setFromObject(root);
 }
 
 function midPoint(min, max) {
@@ -84,9 +82,12 @@ function getExactPosition(Position, shift, direction) {
 }
 
 function updatePlanes(direction) {
-  text.lookAt(direction);
+  // text.lookAt(direction);
+  // scene.remove(text);
   render();
 }
+
+
 
 export {
   extractBones,
@@ -94,5 +95,5 @@ export {
   getAbsolutePosition,
   getMidPosition,
   getExactPosition,
-  updatePlanes,
+  updatePlanes
 };

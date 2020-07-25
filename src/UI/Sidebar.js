@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import skelton from "../variables/skelton";
+// import {handleItemClick} from "../components/ModelLoader"
 export default function Sidebar() {
   const [sideToggle, setsideToggle] = useState(true);
   const [bottomToggle, setbottomToggle] = useState(true);
@@ -8,7 +9,7 @@ export default function Sidebar() {
       <div id="sidebar" className={`sidebar ${sideToggle ? "openSB" : ""}`}>
         <ul className="sidebar-list">
           {skelton.map((s) => (
-            <li onClick={(e) => console.log(e.target.id)} id={s.id}>
+            <li onClick={()=>console.log("x")} id={s.id}>
               {s.label}
             </li>
           ))}
