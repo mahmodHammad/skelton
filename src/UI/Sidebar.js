@@ -39,7 +39,7 @@ export default function Sidebar() {
           id="bottomToggle"
           onClick={() => setbottomToggle(!bottomToggle)}
         >
-          {">"}
+          {"<"}
         </button>
         {description}
       </div>

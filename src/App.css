@@ -11,52 +11,14 @@ canvas {
 
 .sidebar {
   z-index: 100;
-  color: #fff;
+  color: #eee;
   position: absolute;
-  background-color: #fff5;
+  /* background-color: #fff1; */
   top: calc(50% - 120px);
-  width: 200px;
+  width: 135px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   transition: ease 0.5s all;
-}
-
-#sideToggle {
-  position: absolute;
-  top: calc(50% - 18px);
-  right: -18px;
-}
-
-#bottomToggle {
-  position: absolute;
-  top: -18px;
-  transform: rotate(90deg);
-  right: calc(50% - 12px);
-}
-
-.Toggle {
-  color: #eee;
-  border-radius: 50%;
-  transition: ease 0.6s all;
-  width: 35px;
-  height: 35px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 20px;
-  border: none;
-  background-color: #555;
-  /* border: solid 1px #777; */
-  padding-right: 7px;
-  padding-top: 3px;
-}
-
-.Toggle:focus {
-  outline: none;
-}
-
-.Toggle:hover {
-  cursor: pointer;
-  background-color: #aaa;
 }
 
 .sidebar-list {
@@ -73,20 +35,67 @@ canvas {
   border-bottom-right-radius: 50px;
 
   border-right: none;
-  /* background-color: #fff0; */
-  padding: 15px 20px;
-  font-size: 19px;
+  background-color: #e334;
+  padding: 16px 20px;
+  font-size: 18px;
   font-family: sans-serif;
   transition: ease 0.2s all;
 }
 
 .sidebar-list li:hover {
-  background-color: #aaa;
+  background-color: #ccc;
+  color:#500a0a;
   cursor: pointer;
 }
 
+
+#sideToggle {
+  position: absolute;
+  top: calc(50% - 18px);
+  right: -18px;
+}
+
+#bottomToggle {
+  position: absolute;
+  top: -18px;
+  transform: rotate(-90deg);
+  right: calc(50% - 12px);
+}
+
+.Toggle {
+  color: #eee;
+  border-radius: 50%;
+  transition: ease 0.6s all;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  border: none;
+  /* background-color: #555; */
+  background-color: #400d0d;
+  box-shadow: -2px 0px 10px #30060d;
+
+  /* border: solid 1px #777; */
+  padding-right: 7px;
+  padding-top: 3px;
+}
+
+.Toggle:focus {
+  outline: none;
+  
+}
+
+.Toggle:hover {
+  color: #500a0a;
+  cursor: pointer;
+  background-color: #aaa;
+  box-shadow: -2px 0px 10px #30060d00;
+
+}
+
 .openSB {
-  transform: translateX(-188px);
+  transform: translateX(-120px);
 }
 .openBB {
   transform: translateY(90%);
@@ -100,10 +109,12 @@ canvas {
   font-size: 20px;
   width: 50%;
   left: 20%;
-  background-color: #fff5;
+  /* background-color: #fff5; */
+  background-color: #e334;
+
   bottom: 0;
   color: #fff;
-  padding: 20px 40px;
+  padding: 30px 40px 20px;
   transition: ease 0.5s all;
 }
 
@@ -112,5 +123,5 @@ canvas {
 }
 
 .rotateBottomToggle {
-  transform: rotate(270deg) !important;
+  transform: rotate(90deg) !important;
 }
