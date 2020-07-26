@@ -15,8 +15,8 @@ export default [
       "The chest is a part of the anatomy of humans and various other animals located between the neck and the abdomen.",
     active: false,
     shift: { x: 0, y: 1.4, z: 0.4 },
-    direction: { x: 2, y: 0, z: 1.5 },
-    camera: { x:-1 , y:7 , z: 8 },
+    direction: { x: 1, y: 0, z: 1 },
+    camera: { x:-2 , y:7 , z: 8 },
     label: "Chest",
   },
   {
@@ -26,7 +26,7 @@ export default [
     active: false,
     shift: { x: 0, y: 1.5, z: -0.45 },
     direction: { x: -1, y: 0, z: -1 },
-    camera: { x:1 , y: 5, z:-8  },
+    camera: { x:2 , y: 5, z:-10  },
     label: "Backbone",
   },
   {
@@ -36,7 +36,7 @@ export default [
     active: false,
     shift: { x: -1, y: 0.5, z: -0.12 },
     direction: { x: -1, y: 1, z: 1.5 },
-    camera: { x: -10, y: 4, z: 2 },
+    camera: { x: -11, y: 4, z: 5 },
     label: "Right Arm",
   },
   {

@@ -2,7 +2,7 @@ import { scene, render, camera, controls } from "./setup.js";
 import { putBox, putLine, putSphere } from "./SceneObjects";
 import skelton from "../variables/skelton.js";
 import { createPoles } from "./TextDisplayer";
-import TWEEN from '@tweenjs/tween.js'
+import TWEEN from "@tweenjs/tween.js";
 
 import {
   loadModel,
@@ -11,21 +11,18 @@ import {
   updatePlanes,
 } from "./ModelLoader";
 
-function animateCamera(target){
-  let initPosition = camera.position
+function animateCamera(target) {
+  let initPosition = camera.position;
   // let ttarget = {x:0 , y:6, z:13}
-  const tween = new TWEEN.Tween(camera.position).to(target.camera,1000)
-  tween.onUpdate(()=>{
-    console.log(initPosition)
-    camera.position.set(initPosition.x,initPosition.y , initPosition.z)
-  
-  })
+  const tween = new TWEEN.Tween(camera.position).to(target, 1500);
+  tween.onUpdate(() => {
+    console.log(initPosition);
+    camera.position.set(initPosition.x, initPosition.y, initPosition.z);
+  });
   // tween.delay(500)
-  tween.easing(TWEEN.Easing.Quartic.InOut)
-  tween.start()
-
+  tween.easing(TWEEN.Easing.Quartic.InOut);
+  tween.start();
 }
-
 
 let loadedModel = undefined;
 let renderedItems = {};
@@ -34,7 +31,8 @@ function createModel() {
   loadModel().then((gltf) => {
     scene.add(gltf.scene);
     loadedModel = gltf;
-    putBox({x:0,y:3,z:0.2})
+    animateCamera({ x: 0, y: 5, z: 15 });
+    putBox({ x: 0, y: 3, z: 0.2 });
     controls.addEventListener("change", (e) => {
       if (renderedItems.text !== undefined) {
         const cameraPosition = e.target.object.position;
@@ -89,12 +87,11 @@ function renderItem(item) {
 }
 
 function handleItemClick(target) {
-  console.log(target)
+  console.log(target);
   if (!target.active) {
     renderItem(target);
     target.active = true;
-    animateCamera(target)
-
+    animateCamera(target.camera);
   }
 }
 

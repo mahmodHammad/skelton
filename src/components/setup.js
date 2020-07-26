@@ -19,7 +19,7 @@ const camera = new THREE.PerspectiveCamera(
   1000 // far plane
 );
 
-camera.position.set(0, 0, 20);
+camera.position.set(50, 50, -50);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.maxPolarAngle = 3.13 / 2;
 
