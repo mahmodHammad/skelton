@@ -5,7 +5,8 @@ export default [
       "A head is the part of an organism which usually includes the ears, brain, forehead, cheeks, chin, eyes, nose, and mouth.",
     active: false,
     shift: { x: 0, y: 2.8, z: 0.5 },
-    direction: { x: 1.5, y: 1, z: 1 },
+    direction: { x: 1.5, y: 0, z: 0.5 },
+    camera: { x: -1, y: 10, z: 5 },
     label: "Head",
   },
   {
@@ -14,7 +15,8 @@ export default [
       "The chest is a part of the anatomy of humans and various other animals located between the neck and the abdomen.",
     active: false,
     shift: { x: 0, y: 1.4, z: 0.4 },
-    direction: { x: 2, y: -0.5, z: 1.5 },
+    direction: { x: 2, y: 0, z: 1.5 },
+    camera: { x:-1 , y:7 , z: 8 },
     label: "Chest",
   },
   {
@@ -23,7 +25,8 @@ export default [
       "The human back, is the large posterior area of the human body, rising from the top of the buttocks to the back of the neck.",
     active: false,
     shift: { x: 0, y: 1.5, z: -0.45 },
-    direction: { x: 1, y: 1.5, z: -1 },
+    direction: { x: -1, y: 0, z: -1 },
+    camera: { x:1 , y: 5, z:-8  },
     label: "Backbone",
   },
   {
@@ -32,7 +35,8 @@ export default [
       "The right arm is the part of the upper limb between the glenohumeral joint (shoulder joint) and the elbow joint.",
     active: false,
     shift: { x: -1, y: 0.5, z: -0.12 },
-    direction: { x: -1, y: 3, z: 1.5 },
+    direction: { x: -1, y: 1, z: 1.5 },
+    camera: { x: -10, y: 4, z: 2 },
     label: "Right Arm",
   },
   {
@@ -41,7 +45,8 @@ export default [
       "The left arm is the part of the upper limb between the glenohumeral joint (shoulder joint) and the elbow joint.",
     active: false,
     shift: { x: 1, y: 0.5, z: -0.12 },
-    direction: { x: 2, y: -1, z: 1.5 },
+    direction: { x: 1.5, y: 1, z: 0 },
+    camera: { x:10 , y: 4, z: 5 },
     label: "Left Arm",
   },
 ];

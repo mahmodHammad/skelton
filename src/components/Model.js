@@ -2,6 +2,7 @@ import { scene, render, camera, controls } from "./setup.js";
 import { putBox, putLine, putSphere } from "./SceneObjects";
 import skelton from "../variables/skelton.js";
 import { createPoles } from "./TextDisplayer";
+import TWEEN from '@tweenjs/tween.js'
 
 import {
   loadModel,
@@ -9,6 +10,22 @@ import {
   getExactPosition,
   updatePlanes,
 } from "./ModelLoader";
+
+function animateCamera(target){
+  let initPosition = camera.position
+  // let ttarget = {x:0 , y:6, z:13}
+  const tween = new TWEEN.Tween(camera.position).to(target.camera,1000)
+  tween.onUpdate(()=>{
+    console.log(initPosition)
+    camera.position.set(initPosition.x,initPosition.y , initPosition.z)
+  
+  })
+  // tween.delay(500)
+  tween.easing(TWEEN.Easing.Quartic.InOut)
+  tween.start()
+
+}
+
 
 let loadedModel = undefined;
 let renderedItems = {};
@@ -72,9 +89,12 @@ function renderItem(item) {
 }
 
 function handleItemClick(target) {
+  console.log(target)
   if (!target.active) {
     renderItem(target);
     target.active = true;
+    animateCamera(target)
+
   }
 }
 
