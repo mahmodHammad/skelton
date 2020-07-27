@@ -1,4 +1,3 @@
-// import { cube } from "./SceneObjects";
 import { stats, render,controls } from "./setup";
 
 let requestID;

@@ -4,15 +4,12 @@ import { handleItemClick } from "../components/Model";
 export default function Sidebar() {
   const [sideToggle, setsideToggle] = useState(false);
   const [bottomToggle, setbottomToggle] = useState(true);
-  const [description, setdescription] = useState(
-    "The Human Body, <<< Select an element from the sidebar to see more information about it >>> "
-  );
+  const [description, setdescription] = useState("The Human Body");
   function handleSidebarItemClick(e) {
     const targetID = e.target.id;
-    console.log("E",targetID)
     const target = skelton.find((s) => s.id === targetID);
-    setdescription(target.description)
-    setbottomToggle(false)
+    setdescription(target.description);
+    setbottomToggle(false);
     handleItemClick(target);
   }
   return (
@@ -21,7 +18,15 @@ export default function Sidebar() {
         <ul className="sidebar-list">
           {skelton.map((s, index) => (
             <li>
-              <span className="index">{index+1}</span> <span className="itemLabel" onClick={handleSidebarItemClick} id={s.id}>  {s.label}</span>
+              <span className="index">{index + 1}</span>{" "}
+              <span
+                className="itemLabel"
+                onClick={handleSidebarItemClick}
+                id={s.id}
+              >
+                {" "}
+                {s.label}
+              </span>
             </li>
           ))}
         </ul>

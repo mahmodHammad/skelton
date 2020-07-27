@@ -13,12 +13,10 @@ import {
 
 function animateCamera(target) {
   let initPosition = camera.position;
-  // let ttarget = {x:0 , y:6, z:13}
   const tween = new TWEEN.Tween(camera.position).to(target, 1500);
   tween.onUpdate(() => {
     camera.position.set(initPosition.x, initPosition.y, initPosition.z);
   });
-  // tween.delay(500)
   tween.easing(TWEEN.Easing.Quartic.InOut);
   tween.start();
 }

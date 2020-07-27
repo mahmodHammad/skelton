@@ -1,9 +1,7 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { scene, render, camera, controls } from "./setup.js";
+import { render } from "./setup.js";
 import filepath from "../model/boy.glb";
 import * as THREE from "three";
-import { createPoles } from "./TextDisplayer";
-// let text = createPoles("Hello World",1,7,1);
 
 var modelLoader = new GLTFLoader();
 function loadModel() {
@@ -24,28 +22,27 @@ function loadModel() {
 
 function extractBones(gltf) {
   const root = gltf.scene.children[0];
-  const body = root.children[0];
-  const hips = root.children[2];
-  const spine = hips.children[0].children[0];
-  const neck = spine.children[0];
-  const head = neck.children[0];
+  // const body = root.children[0];
+  // const hips = root.children[2];
+  // const spine = hips.children[0].children[0];
+  // const neck = spine.children[0];
+  // const head = neck.children[0];
 
-  const shoulderL = spine.children[1];
-  const armL = shoulderL.children[0];
-  const sarmL = armL.children[0];
-  const hand = sarmL.children[0];
-  const middleFinger = hand.children[1];
+  // const shoulderL = spine.children[1];
+  // const armL = shoulderL.children[0];
+  // const sarmL = armL.children[0];
+  // const hand = sarmL.children[0];
+  // const middleFinger = hand.children[1];
 
-  const shoulderR = spine.children[2];
+  // const shoulderR = spine.children[2];
 
-  const legL = hips.children[1];
-  const shinL = legL.children[0];
-  const feetL = shinL.children[0];
-  const legR = hips.children[2];
+  // const legL = hips.children[1];
+  // const shinL = legL.children[0];
+  // const feetL = shinL.children[0];
+  // const legR = hips.children[2];
 
   return {
     root,
-    head,
   };
 }
 
@@ -81,13 +78,10 @@ function getExactPosition(Position, shift, direction) {
   return { exactPosition, helperPosition, direction };
 }
 
-function updatePlanes( target , item) {
+function updatePlanes(target, item) {
   item.lookAt(target);
-  // scene.remove(text);
   render();
 }
-
-
 
 export {
   extractBones,
@@ -95,5 +89,5 @@ export {
   getAbsolutePosition,
   getMidPosition,
   getExactPosition,
-  updatePlanes
+  updatePlanes,
 };

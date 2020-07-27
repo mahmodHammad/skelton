@@ -11,7 +11,7 @@ class Cat extends Component {
     startAnimationLoop();
   }
 
-  // clean up
+  // clean up to prevent memory leak
   componentWillUnmount() {
     window.cancelAnimationFrame(requestID);
     controls.dispose();
