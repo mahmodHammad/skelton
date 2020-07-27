@@ -16,7 +16,6 @@ function animateCamera(target) {
   // let ttarget = {x:0 , y:6, z:13}
   const tween = new TWEEN.Tween(camera.position).to(target, 1500);
   tween.onUpdate(() => {
-    console.log(initPosition);
     camera.position.set(initPosition.x, initPosition.y, initPosition.z);
   });
   // tween.delay(500)
@@ -87,7 +86,6 @@ function renderItem(item) {
 }
 
 function handleItemClick(target) {
-  console.log(target);
   if (!target.active) {
     renderItem(target);
     target.active = true;

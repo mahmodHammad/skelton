@@ -51,7 +51,7 @@ function putLine(start, end, color) {
 
 function putBox(position) {
   const geometry = new THREE.BoxBufferGeometry(1.5, 1.5, 1);
-  const material = new THREE.MeshBasicMaterial({ color: 0x400d0d });
+  const material = new THREE.MeshBasicMaterial({ color: 0xbe2828 });
   const { x, y, z } = position;
   geometry.translate(x, y, z);
   const cube = new THREE.Mesh(geometry, material);

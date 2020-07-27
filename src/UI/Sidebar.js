@@ -9,6 +9,7 @@ export default function Sidebar() {
   );
   function handleSidebarItemClick(e) {
     const targetID = e.target.id;
+    console.log("E",targetID)
     const target = skelton.find((s) => s.id === targetID);
     setdescription(target.description)
     setbottomToggle(false)
@@ -18,9 +19,9 @@ export default function Sidebar() {
     <div>
       <div id="sidebar" className={`sidebar ${sideToggle ? "openSB" : ""}`}>
         <ul className="sidebar-list">
-          {skelton.map((s) => (
-            <li onClick={handleSidebarItemClick} id={s.id}>
-              {s.label}
+          {skelton.map((s, index) => (
+            <li>
+              <span className="index">{index+1}</span> <span className="itemLabel" onClick={handleSidebarItemClick} id={s.id}>  {s.label}</span>
             </li>
           ))}
         </ul>

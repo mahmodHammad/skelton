@@ -15,10 +15,13 @@ canvas {
   position: absolute;
   /* background-color: #fff1; */
   top: calc(50% - 120px);
-  width: 135px;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  width: 150px;
+  border-top-right-radius: 33px;
+  border-bottom-right-radius: 33px;
   transition: ease 0.5s all;
+  border-right: 2px solid #e33;
+  /* padding: 3px 0; */
+  padding-right: 25px;
 }
 
 .sidebar-list {
@@ -30,24 +33,38 @@ canvas {
 }
 
 .sidebar-list li {
-  border: 1px solid #777;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #e33c;
+  margin-top: 10px ;
+  border: none;
   border-right: none;
-  background-color: #e334;
-  padding: 16px 20px;
-  font-size: 18px;
+  font-size: 17px;
   font-family: sans-serif;
   transition: ease 0.2s all;
 }
-
-.sidebar-list li:hover {
-  background-color: #ccc;
-  color:#500a0a;
-  cursor: pointer;
+.sidebar-list li:first-child {
+  margin-top: 0;
 }
 
+.index {
+  padding: 15px 5px 15px 10px;
+}
+.itemLabel {
+  padding: 15px 10px;
+  display: inline-block;
+  width: 97px;
+  border-left: 2px solid #000;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  transition: ease 0.2s all;
+}
+
+.itemLabel:hover {
+  background-color: #eee;
+  color: #be2828;
+  cursor: pointer;
+}
 
 #sideToggle {
   position: absolute;
@@ -73,7 +90,7 @@ canvas {
   font-size: 20px;
   border: none;
   /* background-color: #555; */
-  background-color: #400d0d;
+  background-color: #be2828;
   box-shadow: -2px 0px 10px #30060d;
 
   /* border: solid 1px #777; */
@@ -83,19 +100,17 @@ canvas {
 
 .Toggle:focus {
   outline: none;
-  
 }
 
 .Toggle:hover {
-  color: #500a0a;
+  color: #be2828;
   cursor: pointer;
-  background-color: #aaa;
+  background-color: #eee;
   box-shadow: -2px 0px 10px #30060d00;
-
 }
 
 .openSB {
-  transform: translateX(-120px);
+  transform: translateX(-150px);
 }
 .openBB {
   transform: translateY(90%);
@@ -109,8 +124,7 @@ canvas {
   font-size: 20px;
   width: 50%;
   left: 20%;
-  /* background-color: #fff5; */
-  background-color: #e334;
+  background-color: #e33c;
 
   bottom: 0;
   color: #fff;
